@@ -1,8 +1,6 @@
 from typing import Annotated
-from pydantic import BaseModel, AwareDatetime, StringConstraints
+from pydantic import AwareDatetime, BaseModel, StringConstraints
 from .constants import VALID_LEVEL
-
-
 class Event(BaseModel):
     """Правила события"""
     timestamp: AwareDatetime

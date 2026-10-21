@@ -1,26 +1,34 @@
+from collections import Counter
+from typing import Iterable
 from .constants import CRITICAL_LEVELS
+def analys(events: Iterable) -> dict:
+    """Составляем отчёт"""
 
 
-def analys(events: list, skipped_lines: int = 0) -> dict:
-    """Анализ событий"""
-    levels: dict[str, int] = {}
-    source: dict[str, int] = {}
-    err_source: dict[str, int] = {}
-    timestamps: list = []
+    level_counts: Counter[str] = Counter()
+    source_counts: Counter[str] = Counter()
+    error_counts: Counter[str] = Counter()
+    critical_counts: Counter[str] = Counter()
+    total = 0
+    first_event_time = None
+    last_event_time = None
     for i in events:
-        timestamps.append(i.timestamp)
-        levels[i.level] = levels.get(i.level, 0) + 1
-        source[i.source] = source.get(i.source, 0) + 1
+        total += 1
+        level_counts[i.level] += 1
+        source_counts[i.source] += 1
         if i.level in CRITICAL_LEVELS:
-            err_source[i.source] = err_source.get(i.source, 0) + 1
-    top_5 = sorted(err_source.items(), key=lambda x: x[1], reverse=True)[:5]
+            error_counts[i.source] += 1
+            if i.level == 'CRITICAL':
+                critical_counts[i.source] += 1
+        first_event_time = min(first_event_time, i.timestamp) if first_event_time else i.timestamp
+        last_event_time = max(last_event_time, i.timestamp) if last_event_time else i.timestamp
+    top_5 = sorted(error_counts.items(), key=lambda x: (x[1], critical_counts[x[0]]), reverse=True)[:5]
     return {
-        "total": len(events),
-        "levels": levels,
-        "source": source,
-        "err_source": err_source,
+        "total": total,
+        "levels": dict(level_counts),
+        "source": dict(source_counts),
+        "err_source": dict(error_counts),
         "top_5": top_5,
-        "first_time_event": min(timestamps) if timestamps else None,
-        "last_time_event": max(timestamps) if timestamps else None,
-        "skipped_lines": skipped_lines,
+        "first_time_event": first_event_time,
+        "last_time_event": last_event_time
     }

@@ -1,0 +1,4 @@
+timestamp,level,source,message
+2024-01-01T10:00:00Z,INFO,api,good
+not-a-date,ERROR,api,bad
+2024-01-01T10:02:00Z,ERROR,db,good

@@ -1,0 +1,3 @@
+{"timestamp": "2024-01-01T10:00:00Z", "level": "INFO", "source": "api", "message": "good"}
+{"timestamp": "not-a-date", "level": "ERROR", "source": "api", "message": "bad"}
+{"timestamp": "2024-01-01T10:02:00Z", "level": "ERROR", "source": "db", "message": "good"}

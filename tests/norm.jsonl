@@ -1,0 +1,15 @@
+{"timestamp": "2024-01-01T10:00:00Z", "level": "INFO", "source": "api", "message": "Запрос получен от клиента"}
+{"timestamp": "2024-01-01T10:00:01Z", "level": "DEBUG", "source": "api", "message": "Начало обработки запроса"}
+{"timestamp": "2024-01-01T10:00:02Z", "level": "INFO", "source": "db", "message": "Выполнение SQL запроса"}
+{"timestamp": "2024-01-01T10:00:03Z", "level": "WARNING", "source": "cache", "message": "Кэш не найден, загрузка из БД"}
+{"timestamp": "2024-01-01T10:00:04Z", "level": "INFO", "source": "api", "message": "Запрос успешно обработан"}
+{"timestamp": "2024-01-01T10:00:05Z", "level": "ERROR", "source": "db", "message": "Ошибка подключения к базе данных"}
+{"timestamp": "2024-01-01T10:00:06Z", "level": "INFO", "source": "auth", "message": "Пользователь авторизован"}
+{"timestamp": "2024-01-01T10:00:07Z", "level": "WARNING", "source": "api", "message": "Медленный ответ от сервиса"}
+{"timestamp": "2024-01-01T10:00:08Z", "level": "ERROR", "source": "api", "message": "Таймаут при обращении к внешнему API"}
+{"timestamp": "2024-01-01T10:00:09Z", "level": "CRITICAL", "source": "db", "message": "Потеря соединения с основной БД"}
+{"timestamp": "2024-01-01T10:00:10Z", "level": "INFO", "source": "cache", "message": "Кэш успешно обновлён"}
+{"timestamp": "2024-01-01T10:00:11Z", "level": "DEBUG", "source": "api", "message": "Завершение обработки запроса"}
+{"timestamp": "2024-01-01T10:00:12Z", "level": "ERROR", "source": "auth", "message": "Неверный токен доступа"}
+{"timestamp": "2024-01-01T10:00:13Z", "level": "INFO", "source": "api", "message": "Запрос завершён успешно"}
+{"timestamp": "2024-01-01T10:00:14Z", "level": "CRITICAL", "source": "api", "message": "Сервис недоступен"}
