@@ -2,37 +2,50 @@ from pathlib import Path
 from typer import Exit, Option, Typer, echo
 from .check import check
 from .analysis import analys
-from .constants import HELP
 from .errors import StreamStatsError, UnsupportedFormatError
-from .parsers import pars_csv, pars_json
-from .report import save
+from .parsers import pars_csv, pars_jsonl
+from .report import save, save_csv
+from .constants import HELP
 
 app = Typer()
 
-def parcing_events(paths: list[Path], skip_invalid: bool, skipped: dict[str, int]):
-    """Читаем файлики и считаем количество пропущенных строк"""
+
+def parcing_events(
+    paths: list[Path], fmt: str, skip_invalid: bool, skipped: dict[str, int]
+):
     for path in paths:
-        if path.suffix.lower() == ".csv":
+        if fmt == "csv":
             count = yield from pars_csv(path, skip_invalid)
             skipped["lines"] += count or 0
-        elif path.suffix.lower() == ".jsonl":
-            count = yield from pars_json(path, skip_invalid)
+        elif fmt == "jsonl":
+            count = yield from pars_jsonl(path, skip_invalid)
             skipped["lines"] += count or 0
         else:
-            raise UnsupportedFormatError(f"Неподдерживаемый формат: {path.suffix}")
+            raise UnsupportedFormatError(f"Неподдерживаемый формат: {fmt}")
 
 
-@app.command(help=HELP)
-def main(file: list[Path],output: Path = Option(Path("report.json"), "--output"),skip_invalid: bool = Option(False, "--skip-invalid"),) -> None:
-    """Запуск программы"""
+@app.command("analyze", help=HELP)
+def main(
+    file: list[Path],
+    format: str = Option(..., "--format"),
+    output: Path = Option(Path("report.json"), "--output"),
+    skip_invalid: bool = Option(False, "--skip-invalid"),
+    csv: bool = Option(False, "--csv"),
+) -> None:
+    """Главная функция -> точка входа"""
     try:
-        if check(file, output):
-            skipped = {"lines": 0}
-            statistics = analys(parcing_events(file, skip_invalid, skipped))
-            statistics["skipped_lines"] = skipped["lines"]
+        check(file, output)
+        skipped = {"lines": 0}
+        statistics = analys(parcing_events(file, format, skip_invalid, skipped))
+        statistics["skipped_lines"] = skipped["lines"]
+        if csv:
+            save_csv(statistics, output)
+        else:
             save(statistics, output)
     except StreamStatsError as error:
         echo(str(error), err=True)
         raise Exit(code=2)
+
+
 if __name__ == "__main__":
     app()
