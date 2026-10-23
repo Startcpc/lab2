@@ -7,7 +7,7 @@ from .parsers import pars_csv, pars_jsonl
 from .report import save, save_csv
 from .constants import HELP
 
-app = Typer()
+app = Typer(help=HELP)
 
 
 def parcing_events(
@@ -45,6 +45,11 @@ def main(
     except StreamStatsError as error:
         echo(str(error), err=True)
         raise Exit(code=2)
+
+
+@app.command(hidden=True)
+def mem() -> None:
+    """Скрытая команда,нужна для корректной работы команд в Тайпер(минимум две команды нужно)"""
 
 
 if __name__ == "__main__":
