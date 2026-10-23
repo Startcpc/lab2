@@ -1,6 +1,15 @@
+import logging
 from logging import getLogger
 from pydantic import ValidationError
 from .errors import InvalidEventError, InvalidTimestampError
+
+logging.basicConfig(
+    filename="streamstats.log",
+    level=logging.WARNING,
+    filemode="w",
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    encoding="utf-8",
+)
 
 logger = getLogger("streamstats")
 
@@ -8,7 +17,6 @@ logger = getLogger("streamstats")
 def validation(
     error: Exception, file_name: str, line_num: int, skip_invalid: bool
 ) -> Exception | None:
-    """Тип ошибки выдает"""
     if skip_invalid:
         logger.warning(f"Пропущена строка {line_num} в файле {file_name}")
         return None
