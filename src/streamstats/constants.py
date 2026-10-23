@@ -4,7 +4,7 @@ HELP = """\b
 Примеры использования:
   python -m streamstats analyze events.csv --format csv
   python -m streamstats analyze events.jsonl --format jsonl
-  python -m streamstats analyze events.csv events.jsonl --format csv --output result.json
+  python -m streamstats analyze events0.csv events1.csv --format csv --output result.json
   python -m streamstats analyze events.csv --format csv --skip-invalid
   python -m streamstats analyze events.csv --format csv --output report.csv --csv
 Справка:
