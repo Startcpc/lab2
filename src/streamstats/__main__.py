@@ -2,7 +2,7 @@ from pathlib import Path
 from typer import Exit, Option, Typer, echo
 from .check import check
 from .analysis import analys
-from .errors import StreamStatsError, UnsupportedFormatError
+from .errors import StreamStatsError, UnsupportedFormatError, EmptyFileError
 from .parsers import pars_csv, pars_jsonl
 from .report import save, save_csv
 from .constants import HELP
@@ -38,6 +38,8 @@ def main(
         skipped = {"lines": 0}
         statistics = analys(parcing_events(file, format, skip_invalid, skipped))
         statistics["skipped_lines"] = skipped["lines"]
+        if statistics["total"] == 0:
+            raise EmptyFileError("Файл пустой")
         if csv:
             save_csv(statistics, output)
         else:

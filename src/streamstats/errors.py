@@ -16,3 +16,7 @@ class InvalidTimestampError(InvalidEventError):
 
 class ConfigurationError(StreamStatsError):
     """Ошибка конфигурации CLI"""
+
+
+class EmptyFileError(StreamStatsError):
+    """Ошибка пустого файла"""
