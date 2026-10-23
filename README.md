@@ -81,7 +81,7 @@ python -m streamstats analyze events.jsonl --format jsonl
 ### Обработка нескольких файлов
 
 ```
-python -m streamstats analyze events1.csv events2.csv --format csv --output report.json
+python -m streamstats analyze events0.csv events1.csv --format csv --output report.json
 ```
 
 ### Пропуск некорректных строк
