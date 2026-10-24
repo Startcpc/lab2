@@ -1,11 +1,11 @@
 from pathlib import Path
 from typer import Exit, Option, Typer, echo
-from .check import check
-from .analysis import analys
-from .errors import StreamStatsError, UnsupportedFormatError, EmptyFileError
-from .parsers import pars_csv, pars_jsonl
-from .report import save, save_csv
-from .constants import HELP
+from streamstats.check import check
+from streamstats.analysis import analys
+from streamstats.errors import StreamStatsError, UnsupportedFormatError, EmptyFileError
+from streamstats.parsers import pars_csv, pars_jsonl
+from streamstats.report import save, save_csv
+from streamstats.constants import HELP
 
 app = Typer(help=HELP)
 
