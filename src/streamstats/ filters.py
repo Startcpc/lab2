@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Iterable
-from .models import Event
+from streamstats.models import Event
 
 
 def filter_by_time(events: Iterable[Event], start: datetime, end: datetime):
