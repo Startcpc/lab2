@@ -1,6 +1,6 @@
 from typing import Annotated
 from pydantic import AwareDatetime, BaseModel, StringConstraints
-from .constants import VALID_LEVEL
+from streamstats.constants import VALID_LEVEL
 
 
 class Event(BaseModel):
