@@ -1,4 +1,4 @@
-import json
+from json import load
 from typer.testing import CliRunner
 from streamstats.__main__ import app
 
@@ -21,7 +21,7 @@ def test_cli_many_files() -> None:
     )
     assert result.exit_code == 0
     with open("tests/multi_report.json", encoding="utf-8") as f:
-        report = json.load(f)
+        report = load(f)
     assert report["total"] == 6
 
 
@@ -40,7 +40,7 @@ def test_unicode() -> None:
     )
     assert result.exit_code == 0
     with open("tests/unicode_report.json", encoding="utf-8") as f:
-        report = json.load(f)
+        report = load(f)
     assert report["total"] == 3
 
 
