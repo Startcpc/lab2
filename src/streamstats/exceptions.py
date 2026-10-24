@@ -1,7 +1,7 @@
 import logging
 from logging import getLogger
 from pydantic import ValidationError
-from .errors import InvalidEventError, InvalidTimestampError
+from streamstats.errors import InvalidEventError, InvalidTimestampError
 
 logging.basicConfig(
     filename="streamstats.log",
