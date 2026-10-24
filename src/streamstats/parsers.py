@@ -1,11 +1,10 @@
 from collections.abc import Generator
-from csv import DictReader
-from csv import Error as CSVDecodeError
+from csv import Error as CSVDecodeError, DictReader
 from json import JSONDecodeError, loads
 from pathlib import Path
 from pydantic import ValidationError
-from .exceptions import validation
-from .models import Event
+from streamstats.exceptions import validation
+from streamstats.models import Event
 
 
 def pars_csv(
