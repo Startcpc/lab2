@@ -1,4 +1,4 @@
-from .errors import ConfigurationError
+from streamstats.errors import ConfigurationError
 from pathlib import Path
 
 
