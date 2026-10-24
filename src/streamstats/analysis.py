@@ -1,6 +1,6 @@
 from collections import Counter
 from typing import Iterable
-from .constants import CRITICAL_LEVELS
+from streamstats.constants import CRITICAL_LEVELS
 
 
 def analys(events: Iterable) -> dict:
